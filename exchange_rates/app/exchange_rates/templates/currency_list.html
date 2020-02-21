@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Currency</title>
+    </head>
+    <body>
+        {% for currency in object_list %}
+        </ul>
+            <li><a href="{% url 'currency_detail' currency.id %}">{{ currency.get_rate}}</a></li>
+        </ul>
+        {% endfor %}
+    </body>
+</html>

@@ -25,7 +25,7 @@ SECRET_KEY = '-$zf)kxxcq%%*0brploy8#i9ny68$u0(txm^_u@smv#3iuk%ye'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'exchange_rates'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'exchange_rates.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +76,18 @@ WSGI_APPLICATION = 'exchange_rates.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'exch_db',
+        'USER': 'exch_admin',
+        'PASSWORD': 'simplepass',
+        'HOST': 'db',
+        'PORT': 5432,
+        'TEST': {
+            'HOST': 'db',
+            'PORT': 5432,
+            'NAME': 'exch_test_db',
+            'USER': 'exch_admin',
+        }
     }
 }
 
@@ -118,3 +129,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {'format': '%(asctime)s: %(levelname)s: %(message)s'},
+    },
+    'handlers': {
+        'console': {
+            'level': os.environ.get('DJANGO_LOG_LEVEL', default='DEBUG'),
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+        'django': {
+            'level': 'INFO',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False
+        },
+    },
+}
