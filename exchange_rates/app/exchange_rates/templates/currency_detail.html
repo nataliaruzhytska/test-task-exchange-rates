@@ -5,6 +5,10 @@
         <title>Currency</title>
     </head>
     <body>
-        <h3>{{ currency.get_rate }}</h3>
+        {% for currency in object_list %}
+        </ul>
+            <li>{{ currency.get_rate }}</li>
+        </ul>
+        {% endfor %}
     </body>
 </html>

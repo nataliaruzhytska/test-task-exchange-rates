@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
+
 
 from .models import Currency
 
@@ -10,18 +11,21 @@ def health_check(request):
 
 class CurrencyListView(ListView):
     model = Currency()
-    queryset = Currency.objects.all()
+    queryset = Currency.objects.all().order_by('currency_name', '-date_valid_from').distinct('currency_name')
     template_name = 'currency_list.html'
     paginate_by = 30
 
     def get_all(self):
-        return self.queryset
+        return self.queryset.all()
 
 
-class CurrencyDetailView(DetailView):
+class CurrencyDetailView(ListView):
     model = Currency()
-    queryset = Currency.objects.all()
-    template_name = 'currency_detail.html'
 
-    def get_currency(self):
-        return self.queryset.filter(currency_id=self.kwargs.get('currency_id'))
+    template_name = 'currency_detail.html'
+    paginate_by = 30
+
+    def get_queryset(self):
+        currency = Currency.objects.get(id=self.kwargs.get('id'))
+        return Currency.objects.filter(currency_name=currency.currency_name).order_by('-date_valid_from')
+

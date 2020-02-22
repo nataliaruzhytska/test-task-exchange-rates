@@ -7,7 +7,7 @@
     <body>
         {% for currency in object_list %}
         </ul>
-            <li><a href="{% url 'currency_detail' currency.id %}">{{ currency.get_rate}}</a></li>
+            <li><a href="{% url 'currency_detail' currency.id %}">{{ currency.get_rate }}</a></li>
         </ul>
         {% endfor %}
     </body>

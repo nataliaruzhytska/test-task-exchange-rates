@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('healthcheck/', health_check, name='health_check'),
     path('exchange_rates/', CurrencyListView.as_view(), name='exchange_rates'),
-    path('exchange_rates/<str:currency_name>/', CurrencyDetailView.as_view(), name='currency_detail'),
+    path('exchange_rates/<id>/', CurrencyDetailView.as_view(), name='currency_detail'),
 
 ]

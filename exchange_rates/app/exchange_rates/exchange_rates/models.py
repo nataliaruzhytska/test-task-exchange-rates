@@ -1,9 +1,10 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Currency(models.Model):
     currency_name = models.CharField(
-        choices=[('UAH', 'UAH'), ('USD', 'USD'), ('EUR', 'EUR')],
+        choices=[('USD', 'USD'), ('EUR', 'EUR'), ('RUB', 'RUB')],
         max_length=3
     )
     purchase_rate = models.FloatField(
@@ -25,14 +26,24 @@ class Currency(models.Model):
         return self.get_rate
 
     def save(self, *args, **kwargs):
-        # if self.get_previous_in_order:
-        #     currency = self.get_previous_in_order
-        #     if self.date_valid_from:
-        #         currency.date_valid_until = self.date_valid_from.__str__() - datetime.timedelta(days=1)
+        currency = Currency.objects.filter(currency_name=self.currency_name).filter(
+            date_valid_from__lt=self.date_valid_from).last()
+        if currency:
+            currency.date_valid_until = self.date_valid_from - timezone.timedelta(days=1)
+            currency.save_base()
         super().save(*args, **kwargs)
 
-    class Meta:
-        ordering = ['date_valid_from']
-        indexes = [
-            models.Index(fields=['currency_name', 'date_valid_from', 'date_valid_until']),
-        ]
+    def delete(self, *args, **kwargs):
+        currency = Currency.objects.filter(currency_name=self.currency_name).filter(
+            date_valid_from__lt=self.date_valid_from).last()
+        currency.date_valid_until = self.date_valid_until
+        currency.save_base()
+
+        super(Currency, self).delete(*args, **kwargs)
+
+
+class Meta:
+    ordering = ['date_valid_from']
+    indexes = [
+        models.Index(fields=['currency_name', 'date_valid_from', 'date_valid_until']),
+    ]
