@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+    {% for currency in object_list %}
+        <div align="left">
+            </ul>
+                <h4><li>{{ currency.get_rate }}</li></h4>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
