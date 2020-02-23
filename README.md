@@ -13,7 +13,7 @@ $ uid=$(id -u) gid=$(id -g) docker exec -ti exchangerates_app_1 bash
 
 
 Load fixtures from file (in container)
-# concierge/manage.py loaddata --format=json exchange_rates/fixtures/init_data_currency.json
+# exchange_rates/manage.py loaddata --format=json exchange_rates/fixtures/init_data_currency.json
 
 
 Collect staticfiles
