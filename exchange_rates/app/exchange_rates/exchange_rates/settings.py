@@ -160,3 +160,5 @@ LOGGING = {
         },
     },
 }
+
+FIXTURES = ['init_data_currency.json']

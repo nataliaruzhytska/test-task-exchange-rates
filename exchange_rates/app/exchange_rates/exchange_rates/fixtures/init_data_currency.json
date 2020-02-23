@@ -1,0 +1,101 @@
+[
+  {
+    "model": "exchange_rates.currency",
+    "pk": 1,
+    "fields": {
+      "currency_name": "USD",
+      "purchase_rate": 24.3,
+      "sale_rate": 25.0,
+      "date_valid_from": "2020-02-02",
+      "date_valid_until": "2020-02-10"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 2,
+    "fields": {
+      "currency_name": "USD",
+      "purchase_rate": 24.3,
+      "sale_rate": 24.5,
+      "date_valid_from": "2020-02-11",
+      "date_valid_until": "2020-02-22"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 6,
+    "fields": {
+      "currency_name": "EUR",
+      "purchase_rate": 26.5,
+      "sale_rate": 26.85,
+      "date_valid_from": "2020-02-03",
+      "date_valid_until": "2020-02-12"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 8,
+    "fields": {
+      "currency_name": "EUR",
+      "purchase_rate": 26.6,
+      "sale_rate": 27.9,
+      "date_valid_from": "2020-02-13",
+      "date_valid_until": "2020-02-21"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 18,
+    "fields": {
+      "currency_name": "RUB",
+      "purchase_rate": 0.360,
+      "sale_rate": 0.397,
+      "date_valid_from": "2020-02-02",
+      "date_valid_until": "2020-02-05"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 21,
+    "fields": {
+      "currency_name": "RUB",
+      "purchase_rate": 0.379,
+      "sale_rate": 0.415,
+      "date_valid_from": "2020-02-12",
+      "date_valid_until": "2020-02-13"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 24,
+    "fields": {
+      "currency_name": "USD",
+      "purchase_rate": 24.45,
+      "sale_rate": 24.95,
+      "date_valid_from": "2019-12-30",
+      "date_valid_until": "2020-01-02"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 25,
+    "fields": {
+      "currency_name": "USD",
+      "purchase_rate": 24.15,
+      "sale_rate": 24.55,
+      "date_valid_from": "2020-01-03",
+      "date_valid_until": "2020-01-14"
+    }
+  },
+  {
+    "model": "exchange_rates.currency",
+    "pk": 26,
+    "fields": {
+      "currency_name": "USD",
+      "purchase_rate": 24.15,
+      "sale_rate": 24.45,
+      "date_valid_from": "2020-01-15",
+      "date_valid_until": "2020-01-17"
+    }
+  }
+]

@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_delete, pre_delete
+from django.dispatch import receiver
 from django.utils import timezone
 
 
@@ -34,16 +36,15 @@ class Currency(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        currency = Currency.objects.filter(currency_name=self.currency_name).filter(
-            date_valid_from__lt=self.date_valid_from).last()
+        queryset = Currency.objects.order_by('date_valid_from').filter(currency_name=self.currency_name)
+        currency = queryset.filter(date_valid_from__lt=self.date_valid_from).last()
         currency.date_valid_until = self.date_valid_until
         currency.save_base()
+        super().delete()
 
-        super(Currency, self).delete(*args, **kwargs)
+    class Meta:
+        ordering = ['date_valid_from']
+        indexes = [
+            models.Index(fields=['currency_name', 'date_valid_from', 'date_valid_until']),
+        ]
 
-
-class Meta:
-    ordering = ['date_valid_from']
-    indexes = [
-        models.Index(fields=['currency_name', 'date_valid_from', 'date_valid_until']),
-    ]
