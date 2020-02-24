@@ -29,3 +29,6 @@ Apply migrations
 
 Run tests
 # exchange_rates/manage.py test --keepdb
+
+Homepage
+# http://localhost:8000/exchange_rates/
