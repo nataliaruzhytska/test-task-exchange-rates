@@ -9,26 +9,29 @@ $ uid=$(id -u) gid=$(id -g) docker-compose up
 
 
 Connect to the container
-$ uid=$(id -u) gid=$(id -g) docker exec -ti exchangerates_app_1 bash
-
-
-Load fixtures from file (in container)
-# exchange_rates/manage.py loaddata --format=json exchange_rates/fixtures/init_data_currency.json
+$ uid=$(id -u) gid=$(id -g) docker exec -ti exchange_rates_app_1 bash
 
 
 Collect staticfiles
 # exchange_rates/manage.py collectstatic --noinput
 
 
+Apply migrations
+# exchange_rates/manage.py migrate
+# exchange_rates/manage.py migrate exchange_rates
+
+
 Create super user
 # exchange_rates/manage.py createsuperuser
 
 
-Apply migrations
-# exchange_rates/manage.py migrate
+Load fixtures from file (in container)
+# exchange_rates/manage.py loaddata --format=json exchange_rates/exchange_rates/fixtures/init_data_currency.json
+
 
 Run tests
 # exchange_rates/manage.py test --keepdb
+
 
 Homepage
 # http://localhost:8000/exchange_rates/
